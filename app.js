@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 4000;
 const mongoose = require('mongoose');
 
 const mongoURI = "mongodb+srv://louisqueruau:mDF6kBHVnrD2EEH1@cluster0.mgq35co.mongodb.net/?retryWrites=true&w=majority";
@@ -20,4 +20,3 @@ db.once('open', () => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
