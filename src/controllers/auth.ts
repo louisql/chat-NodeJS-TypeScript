@@ -1,8 +1,9 @@
-const bcrypt = require('bcrypt'); //using bcrypt for hash
-const User = require('../models/User') 
+import { Request, Response } from 'express';
+import bcrypt from 'bcrypt' //using bcrypt for hash
+import User from '../models/user';
 
 //User registration
-async function registerUser(req, res) {
+export async function registerUser(req: Request, res: Response): Promise<Response>{  
     try {
         const { username, email, password } = req.body;
         const exitingUser = await User.findOne({ email});
@@ -13,14 +14,14 @@ async function registerUser(req, res) {
         const newUser = new User({ username, email, password: hashedPassword})
         await newUser.save();
         return res.status(201).json({ message: 'User registered successfully'})
-    } catch{
+    } catch (error){
         console.error(error);
         return res.status(500).json( {message: 'Internal server error'});
     }
 }
 
 // User Login
-async function loginUser(req, res) {
+async function loginUser(req: Request, res: Response): Promise<Response> {
     try{
         const {email, password} = req.body;
         const user = await User.findOne({ email});
@@ -38,7 +39,7 @@ async function loginUser(req, res) {
     }
 }
 
-module.exports = {
+export default {
     registerUser,
     loginUser,
-}
+};
