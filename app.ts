@@ -1,10 +1,17 @@
 import express from 'express';
+import { errorHandler } from './src/middleware/errorHandler';
 import mongoose, { ConnectOptions} from 'mongoose';
+import router from './src/routes/auth';
+import AppError from './src/utils/app-error';
+
+import dotenv = require('dotenv');
+//Load environment variables (from .env)
+dotenv.config();
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT;
 
-const mongoURI = "mongodb+srv://louisqueruau:mDF6kBHVnrD2EEH1@cluster0.mgq35co.mongodb.net/?retryWrites=true&w=majority";
+const mongoURI = process.env.DATABASE_URI;
 
 // DB connection
 mongoose.connect(mongoURI, {
@@ -14,7 +21,10 @@ mongoose.connect(mongoURI, {
 
 const db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'Database connection error:'));
+db.on('error', (error) =>{
+  console.error('Database connection error:');
+  throw new AppError('Database connection error', 500)
+}); 
 db.once('open', () => {
   console.log('Connected to the database');
 });
@@ -24,10 +34,11 @@ app.use(express.json());
 
 
 //Auth routes
-import router from './src/routes/auth';
 const authRoutes = require('./routes/auth');
 
 app.use('/auth', authRoutes);
+
+app.use(errorHandler) // ! keep errorhandler as the last middleware after all routes !
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
