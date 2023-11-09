@@ -14,10 +14,14 @@ const port = process.env.PORT;
 const mongoURI = process.env.DATABASE_URI;
 
 // DB connection
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-} as mongoose.ConnectOptions); // Use a type assertion here
+if (mongoURI){
+  mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  } as mongoose.ConnectOptions); // Use a type assertion here
+} else {
+  throw new AppError('Problem with environment variable', 500)
+}
 
 const db = mongoose.connection;
 
