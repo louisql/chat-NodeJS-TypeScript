@@ -10,8 +10,8 @@ const JWTSECRET = process.env.JWT_SECRET;
 export async function registerUser(req: Request, res: Response): Promise<Response>{  
     try {
         const { username, email, password } = req.body;
-        const exitingUser = await User.findOne({ email});
-        if (exitingUser) {
+        const existingUser = await User.findOne({ email});
+        if (existingUser) {
             return res.status(400).json({ message: 'User already exists.'})
         }
         const hashedPassword = await bcrypt.hash(password, 10);

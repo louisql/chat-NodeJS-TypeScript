@@ -8,7 +8,7 @@
       "esModuleInterop": true,
       "skipLibCheck": true,
       "moduleResolution": "node",
-      "types": ["node", "express", "mongoose", "express-validator", "dotenv", "./custom.d.ts"]
+      "types": ["node", "express", "mongoose", "express-validator", "dotenv", "jest", "./custom.d.ts"]
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules"]
