@@ -1,13 +1,16 @@
 {
     "compilerOptions": {
-      "target": "ES6",
-      "module": "commonjs",
+      "target": "es5",
+      "module": "es6",
       "outDir": "./dist",
       "rootDir": "./src",
       "strict": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
-      "types": ["node", "express", "./custom.d.ts"]
-    }
-  }
+      "moduleResolution": "node",
+      "types": ["node", "express", "mongoose", "express-validator", "dotenv", "./custom.d.ts"]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}
   

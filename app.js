@@ -4,24 +4,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const errorHandler_1 = require("./src/middleware/errorHandler");
 const mongoose_1 = __importDefault(require("mongoose"));
+const app_error_1 = __importDefault(require("./src/utils/app-error"));
+const dotenv = require("dotenv");
+//Load environment variables (from .env)
+dotenv.config();
 const app = (0, express_1.default)();
-const port = 4000;
-const mongoURI = "mongodb+srv://louisqueruau:mDF6kBHVnrD2EEH1@cluster0.mgq35co.mongodb.net/?retryWrites=true&w=majority";
+const port = process.env.PORT;
+const mongoURI = process.env.DATABASE_URI;
 // DB connection
-mongoose_1.default.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}); // Use a type assertion here
+if (mongoURI) {
+    mongoose_1.default.connect(mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }); // Use a type assertion here
+}
+else {
+    throw new app_error_1.default('Problem with environment variable', 500);
+}
 const db = mongoose_1.default.connection;
-db.on('error', console.error.bind(console, 'Database connection error:'));
+db.on('error', (error) => {
+    console.error('Database connection error:');
+    throw new app_error_1.default('Database connection error', 500);
+});
 db.once('open', () => {
     console.log('Connected to the database');
 });
 //Middleware for parsing JSON data
 app.use(express_1.default.json());
+//Auth routes
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+app.use(errorHandler_1.errorHandler); // ! keep errorhandler as the last middleware after all routes !
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

@@ -1,10 +1,8 @@
 import express from 'express';
-import { errorHandler } from './src/middleware/errorHandler';
+import { errorHandler } from './middleware/errorHandler';
 import mongoose, { ConnectOptions} from 'mongoose';
-import router from './src/routes/auth';
-import AppError from './src/utils/app-error';
-
-import dotenv = require('dotenv');
+import AppError from './utils/app-error';
+import dotenv from 'dotenv';
 //Load environment variables (from .env)
 dotenv.config();
 
@@ -39,7 +37,6 @@ app.use(express.json());
 
 //Auth routes
 const authRoutes = require('./routes/auth');
-
 app.use('/auth', authRoutes);
 
 app.use(errorHandler) // ! keep errorhandler as the last middleware after all routes !
