@@ -1,7 +1,7 @@
 //Middleware to protect routes by ckecking token in incoming request
 
 import { Request, Response, NextFunction } from 'express';
-import AppError from '../utils/app-error';
+import AppError from '../utils/app-error.js';
 import jwt from 'jsonwebtoken';
 
 const JWTSECRET = process.env.JWT_SECRET;

@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt' //using bcrypt for hash
-import User from '../models/user';
-import AppError from '../utils/app-error';
+import User from '../models/user.js';
+import AppError from '../utils/app-error.js';
 
 const JWTSECRET = process.env.JWT_SECRET;
 
