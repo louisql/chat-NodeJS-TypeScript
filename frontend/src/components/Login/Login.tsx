@@ -1,14 +1,12 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-interface RegisterFormData {
-  username: string;
+interface LoginFormData {
   email: string;
   password: string;
 }
 
-const Register: React.FC = () => {
-  const [formData, setFormData] = useState<RegisterFormData>({
-    username: '',
+const Login: React.FC = () => {
+  const [formData, setFormData] = useState<LoginFormData>({
     email: '',
     password: '',
   });
@@ -19,19 +17,14 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // TODO POST request to backend API for user registration
+    // TODO POST request to backend API for user login
     // Use formData to send user input
   };
 
   return (
     <div>
-      <h2>User Registration</h2>
+      <h2>User Login</h2>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" name="username" onChange={handleChange} />
-        </label>
-        <br />
         <label>
           Email:
           <input type="email" name="email" onChange={handleChange} />
@@ -42,10 +35,10 @@ const Register: React.FC = () => {
           <input type="password" name="password" onChange={handleChange} />
         </label>
         <br />
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 };
 
-export default Register;
+export default Login;
