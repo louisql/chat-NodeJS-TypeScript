@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import axios from 'axios';
 
 interface RegisterFormData {
   username: string;
@@ -21,6 +22,14 @@ const Register: React.FC = () => {
     e.preventDefault();
     // TODO POST request to backend API for user registration
     // Use formData to send user input
+
+    try {
+      // const response = await axios.post('http://localhost:4000/register', formData);
+      const response = await axios.post('http://localhost:4000/register', formData);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

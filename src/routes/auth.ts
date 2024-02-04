@@ -10,4 +10,8 @@ router.post('/login', loginUser);
 
 router.get('/profile', authenticateJWT,getUserProfile)
 
+router.get('/', (req, res) => {
+    res.send('In Express API')
+})
+
 export default router;

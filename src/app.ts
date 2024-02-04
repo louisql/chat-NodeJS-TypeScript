@@ -4,12 +4,16 @@ import mongoose, { ConnectOptions} from 'mongoose';
 import AppError from './utils/app-error.js';
 import dotenv from 'dotenv';
 //Load environment variables (from .env)
+import cors from 'cors';
+
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 
 const mongoURI = process.env.DATABASE_URI;
+
+app.use(cors());
 
 // DB connection
 if (mongoURI){
@@ -40,6 +44,8 @@ import authRoutes from './routes/auth.js'
 app.use('/auth', authRoutes);
 
 app.use(errorHandler) // ! keep errorhandler as the last middleware after all routes !
+
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
