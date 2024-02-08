@@ -25,6 +25,7 @@ const Register: React.FC = () => {
 
     try {
       // const response = await axios.post('http://localhost:4000/register', formData);
+      console.log(formData)
       const response = await axios.post('http://localhost:4000/auth/register', formData);
       console.log(response);
     } catch (error) {
