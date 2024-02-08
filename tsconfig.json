@@ -1,34 +1,14 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "es5",
-    "module": "es6",
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "target": "es2020",
+    "module": "commonjs",
+    "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
-    "types": [
-      "node",
-      "express",
-      "mongoose",
-      "express-validator",
-      "dotenv",
-      "jest",
-      "./custom.d.ts"
-    ]
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node"
   },
-  "extends": [
-    "./node_modules/gts/tsconfig-google.json"
-    "@tsconfig/node20/tsconfig.json",
-    "@tsconfig/strictest/tsconfig.json",
-  ],
-  "include": ["./src/**/*"],
-  "ts-node": {
-    "esm": true,
-  },
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*.tsx", "src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

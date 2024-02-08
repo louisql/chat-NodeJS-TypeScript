@@ -11,9 +11,13 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
+//Middleware
+app.use(cors());
+app.use(express.json()); //parsin JSON data
+
 const mongoURI = process.env.DATABASE_URI;
 
-app.use(cors());
+
 
 // DB connection
 if (mongoURI){
@@ -35,9 +39,11 @@ db.once('open', () => {
   console.log('Connected to the database');
 });
 
-//Middleware for parsing JSON data
-app.use(express.json());
 
+
+app.get('/', (req, res) => {
+  res.send('In Express API')
+})
 
 //Auth routes
 import authRoutes from './routes/auth.js'
@@ -47,6 +53,15 @@ app.use(errorHandler) // ! keep errorhandler as the last middleware after all ro
 
 
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+});
+
+// Handle termination signals
+process.on('SIGINT', () => {
+  console.log('Received SIGINT. Closing server gracefully...');
+  server.close(() => {
+    console.log('Server closed.');
+    process.exit(0);
+  });
 });

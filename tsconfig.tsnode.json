@@ -1,1 +1,2 @@
-tsconfig.json(24,5): error TS6053: File '@tsconfig/strictest/tsconfig.json' not found.
+tsconfig.json(25,5): error TS6053: File '@tsconfig/strictest/tsconfig.json' not found.
+error TS5083: Cannot read file '/Users/louistest/chat-NodeJS-TypeScript/node_modules/gts/tsconfig-google.json'.
