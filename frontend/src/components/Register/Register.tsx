@@ -20,8 +20,6 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // TODO POST request to backend API for user registration
-    // Use formData to send user input
 
     try {
       // const response = await axios.post('http://localhost:4000/register', formData);

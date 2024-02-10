@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 
 interface LoginFormData {
@@ -19,6 +20,14 @@ const Login: React.FC = () => {
     e.preventDefault();
     // TODO POST request to backend API for user login
     // Use formData to send user input
+
+    try{
+      console.log(formData)
+      const response = axios.post('http://localhost:4000/auth/login', formData)
+      console.log(response)
+    } catch (error){
+      console.log(error);
+    }
   };
 
   return (

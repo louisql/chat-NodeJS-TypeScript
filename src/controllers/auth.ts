@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt' //using bcrypt for hash
 import User from '../models/user.js';
 import AppError from '../utils/app-error.js';
 
-const JWTSECRET = process.env.JWT_SECRET;
 
 //User registration
 export async function registerUser(req: Request, res: Response): Promise<Response>{  
@@ -38,6 +37,9 @@ export async function loginUser(req: Request, res: Response): Promise<Response> 
         if (!passwordMatch){
             throw new AppError('Invalid credentials', 401); // 401 Unauthorized
         }
+        const JWTSECRET = process.env.JWT_SECRET;
+
+        console.log(JWTSECRET)
 
         if (!JWTSECRET) {
             throw new Error('JWT secret is not defined in the environment variables');
@@ -58,7 +60,10 @@ export async function loginUser(req: Request, res: Response): Promise<Response> 
 export async function getUserProfile(req: Request, res: Response): Promise<Response>{
     try {
         //Accessing user data from request added by JWT
+        console.log(req)
+        // console.log(req.user)
         const userData = req.user;
+        // console.log(userData)
 
         const userProfile = await User.findById(userData.userId);
 

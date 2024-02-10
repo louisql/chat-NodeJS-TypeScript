@@ -4,3 +4,9 @@ declare namespace Express {
     }
 }
 
+declare namespace NodeJS {
+    interface ProcessEnv {
+      JWT_SECRET: string;
+      // Add other custom environment variables here if needed
+    }
+  }

@@ -6,10 +6,11 @@ import dotenv from 'dotenv';
 //Load environment variables (from .env)
 import cors from 'cors';
 
-dotenv.config();
+dotenv.config({path: "./.env"});
 
 const app = express();
 const port = process.env.PORT || 4000;
+console.log("process.env.PORT", process.env.JWT_SECRET)
 
 //Middleware
 app.use(cors());
